@@ -1,6 +1,7 @@
 import express from "express";
 import bodyParser from "body-parser";
-import balanceSheetRoutes from "./routes/balanceSheetRoutes";
+
+import routes from "./routes";
 
 const app = express();
 
@@ -8,6 +9,7 @@ const app = express();
 app.use(bodyParser.json());
 
 // Routes
-app.use("/api", balanceSheetRoutes);
+
+app.use("/api", routes);
 
 export default app;

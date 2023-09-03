@@ -5,3 +5,14 @@ export interface IBusinessDetails {
   accounting_provider: string;
   loan_amount: string;
 }
+
+export interface IBalanceSheet {
+  year: number;
+  month: number;
+  profitOrLoss: number;
+  assetsValue: number;
+}
+
+export interface ILoanApplicationRequest extends IBusinessDetails {
+  balance_sheet: IBalanceSheet[];
+}
