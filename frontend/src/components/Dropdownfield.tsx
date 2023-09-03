@@ -28,6 +28,7 @@ const DropdownField: React.FC<DropdownProps> = ({
         value={value}
         onChange={onChange}
         name={fieldname}
+        required
       >
         {options.map((option, index) => (
           <option key={index} value={option.value}>

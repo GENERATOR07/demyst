@@ -26,6 +26,7 @@ const TextareaField: React.FC<TextareaProps> = ({
         value={value}
         onChange={onChange}
         name={fieldname}
+        required
       />
     </div>
   );

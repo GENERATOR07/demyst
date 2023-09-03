@@ -35,7 +35,7 @@ const Form: React.FC<FormProps> = ({ title, handelSubmit }) => {
   return (
     <div className="w-full flex flex-col gap-2 divide-y-2 divide-gray-400">
       <h1>{title}</h1>
-      <form className="w-1/3 p-2 mr-10" onSubmit={handleFormSubmit}>
+      <form className="w-1/2 p-2 mr-10" onSubmit={handleFormSubmit}>
         <InputField
           fieldname="business_name"
           label="Business Name"

@@ -1,18 +1,45 @@
-import React from "react";
+import React, { useState } from "react";
 import BusinessDetailsForm from "../components/BusinessDetailsForm";
-import { fetchBalanceSheet } from "../apis/apiBalanceSheet";
+import { fetchBalanceSheet } from "../apis/api";
 import { IBusinessDetails } from "../interfaces/businessDetails";
+import BalanceSheetReview, {
+  BalanceSheetItem,
+} from "../components/BalanceSheetReview";
+import Button from "../components/Button";
+import { useNavigate } from "react-router-dom";
 
 export default function Application() {
-  const handleSubmit = (data: IBusinessDetails) => {
-    console.log(fetchBalanceSheet(data));
+  const [balanceSheetData, setBalanceSheetData] = useState<BalanceSheetItem[]>(
+    []
+  );
+  const navigate = useNavigate();
+  const handelFetchBalanceSheet = (data: IBusinessDetails) => {
+    const balanceSheet = fetchBalanceSheet(data);
+    setBalanceSheetData(balanceSheet);
+  };
+
+  const handelSubmit = () => {
+    navigate("/results");
   };
   return (
-    <div className="p-8">
+    <div className="p-8 flex ">
       <BusinessDetailsForm
-        handelSubmit={handleSubmit}
+        handelSubmit={handelFetchBalanceSheet}
         title="Bussines Details Form"
       />
+      {balanceSheetData.length ? (
+        <div className="w-1/2 max-w-screen-lg mx-auto">
+          <BalanceSheetReview data={balanceSheetData} />
+          <Button
+            label="Review and submit application"
+            onClick={handelSubmit}
+          />
+        </div>
+      ) : (
+        <p>
+          Please fetch balance sheet in order to review and submit application{" "}
+        </p>
+      )}
     </div>
   );
 }

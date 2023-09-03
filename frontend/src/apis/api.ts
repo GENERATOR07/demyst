@@ -4,3 +4,7 @@ import { IBusinessDetails } from "../interfaces/businessDetails";
 export const fetchBalanceSheet = (data: IBusinessDetails) => {
   return BALANCE_SHEET;
 };
+
+export const submitApplication = () => {
+  return "";
+};
