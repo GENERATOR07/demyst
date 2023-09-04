@@ -3,13 +3,13 @@ import BusinessDetailsForm from "../components/BusinessDetailsForm";
 import { fetchBalanceSheet } from "../apis/api";
 import { IBusinessDetails } from "../interfaces/businessDetails";
 import BalanceSheetReview, {
-  BalanceSheetItem,
+  IBalanceSheetItem,
 } from "../components/BalanceSheetReview";
 import Button from "../components/Button";
 import { useNavigate } from "react-router-dom";
 
 export default function Application() {
-  const [balanceSheetData, setBalanceSheetData] = useState<BalanceSheetItem[]>(
+  const [balanceSheetData, setBalanceSheetData] = useState<IBalanceSheetItem[]>(
     []
   );
   const navigate = useNavigate();

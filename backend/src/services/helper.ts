@@ -14,14 +14,14 @@ const averageAssetValueAcrossYear = (balanceSheet: IBalanceSheet[]): number => {
   for (let i = 0; i < 12; i++) {
     totalAssetValue += balanceSheet[i].assetsValue;
   }
-  let averageAssetValue = totalAssetValue / 12;
+  const averageAssetValue = totalAssetValue / 12;
   return averageAssetValue;
 };
 
 export const findPreAssessmentValue = (
   balance_sheet: IBalanceSheet[],
   loan_amount: number
-) => {
+): string => {
   let preAssessmentValue: string = "20";
   if (profitLastYear(balance_sheet) > 0) preAssessmentValue = "60";
   if (averageAssetValueAcrossYear(balance_sheet) > loan_amount)

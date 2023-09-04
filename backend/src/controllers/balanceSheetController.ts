@@ -1,25 +1,27 @@
-import { Request, Response } from "express";
+import { NextFunction, Request, Response } from "express";
 import { getBalanceSheetData } from "../services/balanceSheetService";
 import { IBusinessDetails } from "../interfaces";
+import { validateBusinessDetails } from "../utils/validation";
+import CustomError from "../utils/customError";
 
-export const getBalanceSheet = async (req: Request, res: Response) => {
+export const getBalanceSheet = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
   try {
     const businessDetails: IBusinessDetails = req.body;
 
-    if (
-      !businessDetails.business_name ||
-      !businessDetails.year_established ||
-      !businessDetails.summary ||
-      !businessDetails.accounting_provider ||
-      !businessDetails.loan_amount
-    ) {
-      return res.status(400).json({ error: "Incomplete business details" });
-    }
+    // Validate the loan application request data using the validation function
+    const { error } = validateBusinessDetails(businessDetails);
 
+    if (error) {
+      // Handle validation errors
+      throw new CustomError(error.details[0].message, 400);
+    }
     const balanceSheetData = await getBalanceSheetData(businessDetails);
     res.status(200).json(balanceSheetData);
   } catch (error) {
-    console.error("Error fetching balance sheet:", error);
-    res.status(500).json({ error: "Internal server error" });
+    next(error);
   }
 };

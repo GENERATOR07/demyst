@@ -15,7 +15,7 @@ export const processLoanApplication = async (
   try {
     const preAssessmentValue = findPreAssessmentValue(
       balance_sheet,
-      +loan_amount
+      parseInt(loan_amount)
     );
     const decisionEngineData: IdecisionRequestData = {
       business_name,

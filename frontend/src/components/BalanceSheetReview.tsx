@@ -1,7 +1,7 @@
 import React from "react";
 import Button from "./Button";
 
-export interface BalanceSheetItem {
+export interface IBalanceSheetItem {
   year: number;
   month: number;
   profitOrLoss: number;
@@ -9,7 +9,7 @@ export interface BalanceSheetItem {
 }
 
 interface BalanceSheetProps {
-  data: BalanceSheetItem[];
+  data: IBalanceSheetItem[];
 }
 
 const BalanceSheetReview: React.FC<BalanceSheetProps> = ({ data }) => {

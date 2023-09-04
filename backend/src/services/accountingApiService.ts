@@ -2,7 +2,7 @@ import axios, { AxiosRequestConfig } from "axios";
 import { IBusinessDetails } from "../interfaces";
 import { BALANCE_SHEET } from "../Data/balanceSheet";
 
-const ACCOUNTING_API_BASE_URL = "https://api.example.com";
+const ACCOUNTING_API_BASE_URL = "https://.com";
 const API_KEY = "your-api-key";
 
 const api = axios.create({
