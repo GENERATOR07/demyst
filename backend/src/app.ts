@@ -1,10 +1,13 @@
 import express from "express";
 import bodyParser from "body-parser";
+import cors from "cors";
 
 import routes from "./routes";
 import errorHandler from "./middleware/errorHandler";
 
 const app = express();
+
+app.use(cors());
 
 // Middleware
 app.use(bodyParser.json());

@@ -1,27 +1,38 @@
 import React, { useState } from "react";
 import BusinessDetailsForm from "../components/BusinessDetailsForm";
-import { fetchBalanceSheet } from "../apis/api";
-import { IBusinessDetails } from "../interfaces/businessDetails";
+import { fetchBalanceSheet, submitApplication } from "../apis/api";
+import { IBusinessDetails, ILoanApplicationRequest } from "../interfaces";
 import BalanceSheetReview, {
   IBalanceSheetItem,
 } from "../components/BalanceSheetReview";
 import Button from "../components/Button";
-import { useNavigate } from "react-router-dom";
+
+import ApplicationResult from "../components/ApplicationResult";
 
 export default function Application() {
   const [balanceSheetData, setBalanceSheetData] = useState<IBalanceSheetItem[]>(
     []
   );
-  const navigate = useNavigate();
-  const handelFetchBalanceSheet = (data: IBusinessDetails) => {
-    const balanceSheet = fetchBalanceSheet(data);
+  const [businessDetails, setbusinessDetails] = useState<IBusinessDetails>();
+  const [finalResult, setFinalResult] = useState<string | undefined>("");
+
+  const handelFetchBalanceSheet = async (data: IBusinessDetails) => {
+    setbusinessDetails(data);
+    const balanceSheet = await fetchBalanceSheet(data);
     setBalanceSheetData(balanceSheet);
   };
 
-  const handelSubmit = () => {
-    navigate("/results");
+  const handelSubmit = async () => {
+    const finalData: ILoanApplicationRequest = {
+      ...businessDetails!,
+      balance_sheet: balanceSheetData,
+    };
+    const result = await submitApplication(finalData);
+    setFinalResult(result);
   };
-  return (
+  return finalResult ? (
+    <ApplicationResult result={finalResult} />
+  ) : (
     <div className="p-8 flex ">
       <BusinessDetailsForm
         handelSubmit={handelFetchBalanceSheet}
