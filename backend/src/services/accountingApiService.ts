@@ -1,5 +1,5 @@
 import axios, { AxiosRequestConfig } from "axios";
-import { IBusinessDetails } from "../interfaces";
+import { IBalanceSheet, IBusinessDetails } from "../interfaces";
 import { BALANCE_SHEET } from "../Data/balanceSheet";
 
 const ACCOUNTING_API_BASE_URL = "https://.com";
@@ -14,12 +14,13 @@ const api = axios.create({
 
 export const getBalanceSheetDataFromApi = async (
   businessDetails: IBusinessDetails
-) => {
+): Promise<IBalanceSheet[]> => {
   const config: AxiosRequestConfig = {
     data: businessDetails,
   };
 
   try {
+    //here Accounting provider api is called in order to get balance sheet
     // const response = await api.post("/balance-sheet", null, config);
     return BALANCE_SHEET;
   } catch (error) {

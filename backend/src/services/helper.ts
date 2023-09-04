@@ -1,5 +1,10 @@
 import { IBalanceSheet } from "../interfaces";
 
+/*here the code is written Assuming that the first  12 items(months) of balance sheet is latest data,
+ in case balance sheet has more than 12 months of data ,
+ we can also restrict it during validation but as of now this is how it is
+*/
+
 const profitLastYear = (balanceSheet: IBalanceSheet[]): number => {
   let profit: number = 0;
 

@@ -1,4 +1,6 @@
-export const BALANCE_SHEET = [
+import { IBalanceSheet } from "../interfaces";
+
+export const BALANCE_SHEET: IBalanceSheet[] = [
   {
     year: 2022,
     month: 1,

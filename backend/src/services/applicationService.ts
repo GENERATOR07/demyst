@@ -1,5 +1,5 @@
-import { ILoanApplicationRequest } from "../interfaces";
-import { IdecisionRequestData, requestDecision } from "./decisionEngineService";
+import { IDecisionRequestData, ILoanApplicationRequest } from "../interfaces";
+import { requestDecision } from "./decisionEngineService";
 import { findPreAssessmentValue } from "./helper";
 
 export const processLoanApplication = async (
@@ -17,7 +17,7 @@ export const processLoanApplication = async (
       balance_sheet,
       parseInt(loan_amount)
     );
-    const decisionEngineData: IdecisionRequestData = {
+    const decisionEngineData: IDecisionRequestData = {
       business_name,
       year_established,
       summary,
